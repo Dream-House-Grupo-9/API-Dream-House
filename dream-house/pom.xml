@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.1</version>
+		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>school.sptech</groupId>
-	<artifactId>c1-01211003-anderson-souza-oliveira</artifactId>
+	<groupId>com.sptech</groupId>
+	<artifactId>dream-house</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>c1-01211003-anderson-souza-oliveira</name>
-	<description>projeto-avaliacao-continuada-01</description>
+	<name>dream-house</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
