@@ -3,9 +3,9 @@ package com.sptech.dreamhouse.entidade;
 public class DetalhesAnuncio {
 
     private int idDetalhesAnuncio;
-    private int ativoDiaria;
-    private int ativoSemanal;
-    private int ativoMensal;
+    private boolean ativoDiaria;
+    private boolean ativoSemanal;
+    private boolean ativoMensal;
     private double valoDiaria;
     private double valoSemanal;
     private double valoMensal;
@@ -14,16 +14,16 @@ public class DetalhesAnuncio {
     private boolean garagem;
     private boolean areaDeTrabalho;
     private boolean mobiliada;
-    private int fkAnuncio;
+    private Integer fkAnuncio;
 
 
-    public DetalhesAnuncio(int idDetalhesAnuncio, int ativoDiaria,
-                           int ativoSemanal, int ativoMensal,
+    public DetalhesAnuncio(int idDetalhesAnuncio, boolean ativoDiaria,
+                           boolean ativoSemanal, boolean ativoMensal,
                            double valoDiaria, double valoSemanal,
                            double valoMensal, int qtdDromitorios,
                            int qtdToaletes, boolean garagem,
                            boolean areaDeTrabalho,
-                           boolean mobiliada, int fkAnuncio)
+                           boolean mobiliada, Integer fkAnuncio)
     {
         this.idDetalhesAnuncio = idDetalhesAnuncio;
         this.ativoDiaria = ativoDiaria;
@@ -44,15 +44,15 @@ public class DetalhesAnuncio {
         return idDetalhesAnuncio;
     }
 
-    public int getAtivoDiaria() {
+    public boolean isAtivoDiaria() {
         return ativoDiaria;
     }
 
-    public int getAtivoSemanal() {
+    public boolean isAtivoSemanal() {
         return ativoSemanal;
     }
 
-    public int getAtivoMensal() {
+    public boolean isAtivoMensal() {
         return ativoMensal;
     }
 
@@ -88,7 +88,7 @@ public class DetalhesAnuncio {
         return mobiliada;
     }
 
-    public int getFkAnuncio() {
+    public Integer getFkAnuncio() {
         return fkAnuncio;
     }
 }

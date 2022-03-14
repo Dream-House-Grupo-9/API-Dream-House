@@ -16,12 +16,12 @@ public class UsuarioControle {
 
 
     @GetMapping
-    public ResponseEntity listarUsuarios(List<Usuario> lista){
-        if(lista.isEmpty()){
-            return ResponseEntity.status(204).body(lista);
+    public ResponseEntity listarUsuarios(){
+        if(usuarios.isEmpty()){
+            return ResponseEntity.status(204).body(usuarios);
         }
 
-        return ResponseEntity.status(200).body(lista);
+        return ResponseEntity.status(200).body(usuarios);
     }
 
     @PostMapping
