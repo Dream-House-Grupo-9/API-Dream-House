@@ -1,14 +1,23 @@
 package com.sptech.dreamhouse.entidade;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class DetalhesAnuncio {
 
-    private int idDetalhesAnuncio;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idDetalhesAnuncio;
+
     private boolean ativoDiaria;
     private boolean ativoSemanal;
     private boolean ativoMensal;
-    private double valoDiaria;
-    private double valoSemanal;
-    private double valoMensal;
+    private double valorDiaria;
+    private double valorSemanal;
+    private double valorMensal;
     private int qtdDromitorios;
     private int qtdToaletes;
     private boolean garagem;
@@ -17,78 +26,107 @@ public class DetalhesAnuncio {
     private Integer fkAnuncio;
 
 
-    public DetalhesAnuncio(int idDetalhesAnuncio, boolean ativoDiaria,
-                           boolean ativoSemanal, boolean ativoMensal,
-                           double valoDiaria, double valoSemanal,
-                           double valoMensal, int qtdDromitorios,
-                           int qtdToaletes, boolean garagem,
-                           boolean areaDeTrabalho,
-                           boolean mobiliada, Integer fkAnuncio)
-    {
-        this.idDetalhesAnuncio = idDetalhesAnuncio;
-        this.ativoDiaria = ativoDiaria;
-        this.ativoSemanal = ativoSemanal;
-        this.ativoMensal = ativoMensal;
-        this.valoDiaria = valoDiaria;
-        this.valoSemanal = valoSemanal;
-        this.valoMensal = valoMensal;
-        this.qtdDromitorios = qtdDromitorios;
-        this.qtdToaletes = qtdToaletes;
-        this.garagem = garagem;
-        this.areaDeTrabalho = areaDeTrabalho;
-        this.mobiliada = mobiliada;
-        this.fkAnuncio = fkAnuncio;
+    public Integer getIdDetalhesAnuncio() {
+        return idDetalhesAnuncio;
     }
 
-    public int getIdDetalhesAnuncio() {
-        return idDetalhesAnuncio;
+    public void setIdDetalhesAnuncio(Integer idDetalhesAnuncio) {
+        this.idDetalhesAnuncio = idDetalhesAnuncio;
     }
 
     public boolean isAtivoDiaria() {
         return ativoDiaria;
     }
 
+    public void setAtivoDiaria(boolean ativoDiaria) {
+        this.ativoDiaria = ativoDiaria;
+    }
+
     public boolean isAtivoSemanal() {
         return ativoSemanal;
+    }
+
+    public void setAtivoSemanal(boolean ativoSemanal) {
+        this.ativoSemanal = ativoSemanal;
     }
 
     public boolean isAtivoMensal() {
         return ativoMensal;
     }
 
-    public double getValoDiaria() {
-        return valoDiaria;
+    public void setAtivoMensal(boolean ativoMensal) {
+        this.ativoMensal = ativoMensal;
     }
 
-    public double getValoSemanal() {
-        return valoSemanal;
+    public double getValorDiaria() {
+        return valorDiaria;
     }
 
-    public double getValoMensal() {
-        return valoMensal;
+    public void setValorDiaria(double valorDiaria) {
+        this.valorDiaria = valorDiaria;
+    }
+
+    public double getValorSemanal() {
+        return valorSemanal;
+    }
+
+    public void setValorSemanal(double valorSemanal) {
+        this.valorSemanal = valorSemanal;
+    }
+
+    public double getValorMensal() {
+        return valorMensal;
+    }
+
+    public void setValorMensal(double valorMensal) {
+        this.valorMensal = valorMensal;
     }
 
     public int getQtdDromitorios() {
         return qtdDromitorios;
     }
 
+    public void setQtdDromitorios(int qtdDromitorios) {
+        this.qtdDromitorios = qtdDromitorios;
+    }
+
     public int getQtdToaletes() {
         return qtdToaletes;
+    }
+
+    public void setQtdToaletes(int qtdToaletes) {
+        this.qtdToaletes = qtdToaletes;
     }
 
     public boolean isGaragem() {
         return garagem;
     }
 
+    public void setGaragem(boolean garagem) {
+        this.garagem = garagem;
+    }
+
     public boolean isAreaDeTrabalho() {
         return areaDeTrabalho;
+    }
+
+    public void setAreaDeTrabalho(boolean areaDeTrabalho) {
+        this.areaDeTrabalho = areaDeTrabalho;
     }
 
     public boolean isMobiliada() {
         return mobiliada;
     }
 
+    public void setMobiliada(boolean mobiliada) {
+        this.mobiliada = mobiliada;
+    }
+
     public Integer getFkAnuncio() {
         return fkAnuncio;
+    }
+
+    public void setFkAnuncio(Integer fkAnuncio) {
+        this.fkAnuncio = fkAnuncio;
     }
 }

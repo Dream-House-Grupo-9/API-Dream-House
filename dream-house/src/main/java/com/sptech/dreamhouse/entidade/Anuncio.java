@@ -1,9 +1,19 @@
 package com.sptech.dreamhouse.entidade;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
+
 public class Anuncio {
-    private int idAnuncio;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idAnuncio;
+
     private LocalDate dtPublicacao;
     private String descricao;
     private LocalDate inicioDisponibilidade;
@@ -14,25 +24,6 @@ public class Anuncio {
     private String numero;
     private int fkCategoria;
     private int fkCliente;
-
-    public Anuncio(int idAnuncio, LocalDate dtPublicacao,
-                   String descricao, LocalDate inicioDisponibilidade,
-                   LocalDate finalDisponibilidade, String cidade,
-                   String bairro, String lougadoro,
-                   String numero, int fkCategoria, int fkCliente)
-    {
-        this.idAnuncio = idAnuncio;
-        this.dtPublicacao = dtPublicacao;
-        this.descricao = descricao;
-        this.inicioDisponibilidade = inicioDisponibilidade;
-        this.finalDisponibilidade = finalDisponibilidade;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.lougadoro = lougadoro;
-        this.numero = numero;
-        this.fkCategoria = fkCategoria;
-        this.fkCliente = fkCliente;
-    }
 
     public int getIdAnuncio() {
         return idAnuncio;
