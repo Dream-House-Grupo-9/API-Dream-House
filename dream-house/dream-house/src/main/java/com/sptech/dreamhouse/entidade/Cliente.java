@@ -1,9 +1,16 @@
 package com.sptech.dreamhouse.entidade;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Entity
@@ -14,10 +21,28 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCliente;
 
+    @CPF
+    @NotBlank
+    @Length(min = 11)
     private String cpf;
+    @Past
+    @NotBlank
     private LocalDate dtNascimento;
+    @Email
+    @NotBlank
+    @Length(min = 11, max = 50)
     private String email;
+
+    @NotBlank
+    @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
+            message = "Informe um telefone válido com ou sem ddd")
+    @Length(min = 15, max = 20)
+
     private String telefone;
+    @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
+            message = "Informe um telefone válido com ou sem ddd")
+    @NotBlank
+    @Length(min = 15, max = 20)
     private String whatsapp;
 
 

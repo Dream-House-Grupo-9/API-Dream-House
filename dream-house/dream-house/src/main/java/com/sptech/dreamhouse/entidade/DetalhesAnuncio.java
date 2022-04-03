@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class DetalhesAnuncio {
@@ -15,10 +18,20 @@ public class DetalhesAnuncio {
     private boolean ativoDiaria;
     private boolean ativoSemanal;
     private boolean ativoMensal;
+    @Positive
+    @NotBlank
     private double valorDiaria;
+    @Positive
+    @NotBlank
     private double valorSemanal;
+    @Positive
+    @NotBlank
     private double valorMensal;
+    @Positive
+    @NotBlank
     private int qtdDromitorios;
+    @Positive
+    @NotBlank
     private int qtdToaletes;
     private boolean garagem;
     private boolean areaDeTrabalho;
