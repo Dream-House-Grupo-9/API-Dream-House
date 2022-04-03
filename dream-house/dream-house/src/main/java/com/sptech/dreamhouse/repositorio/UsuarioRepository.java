@@ -10,12 +10,12 @@ import javax.transaction.Transactional;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     @Query("select u.codigo from Usuario u where u.email = ?1 and u.senha = ?2")
-    Integer validaId(String email, String senha);
+    Integer validaCodigo(String email, String senha);
 
 
     @Transactional
     @Modifying
     @Query("update Usuario u set u.autenticado = ?1 where u.codigo = ?2")
-    void autenticarUsuario(boolean autentica, Integer codigo);
+    void setAutenticacao(boolean autentica, Integer codigo);
 
 }
