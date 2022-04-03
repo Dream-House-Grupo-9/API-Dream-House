@@ -25,6 +25,50 @@ public class Anuncio {
     private int fkCategoria;
     private int fkCliente;
 
+    public void setIdAnuncio(Integer idAnuncio) {
+        this.idAnuncio = idAnuncio;
+    }
+
+    public void setDtPublicacao(LocalDate dtPublicacao) {
+        this.dtPublicacao = dtPublicacao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setInicioDisponibilidade(LocalDate inicioDisponibilidade) {
+        this.inicioDisponibilidade = inicioDisponibilidade;
+    }
+
+    public void setFinalDisponibilidade(LocalDate finalDisponibilidade) {
+        this.finalDisponibilidade = finalDisponibilidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setLougadoro(String lougadoro) {
+        this.lougadoro = lougadoro;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public void setFkCategoria(int fkCategoria) {
+        this.fkCategoria = fkCategoria;
+    }
+
+    public void setFkCliente(int fkCliente) {
+        this.fkCliente = fkCliente;
+    }
+
     public int getIdAnuncio() {
         return idAnuncio;
     }
