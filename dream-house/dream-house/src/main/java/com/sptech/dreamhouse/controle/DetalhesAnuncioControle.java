@@ -76,27 +76,4 @@ public class DetalhesAnuncioControle {
         return ResponseEntity.status(404).build();
     }
 
-
-//    @GetMapping("/orcamento/{fkAnuncio}/{qtdOspedagem}")
-//    public ResponseEntity consultarOrcamento(
-//            @PathVariable int fkAnuncio,
-//            @PathVariable int qtdOspedagem) {
-//
-//        return ResponseEntity.status(200).body(fazerOrcamento(detalhes,fkAnuncio,qtdOspedagem));
-//    }
-
-//    public String fazerOrcamento(List<DetalhesAnuncio> lista, Integer fkAnuncio, Integer qtdOspedagem) {
-//        Diaria diaria = new Diaria();
-//        Semanal semanal = new Semanal();
-//        Mensal mensal = new Mensal();
-//
-//        for(DetalhesAnuncio d : detalhes){
-//            if(d.getFkAnuncio().equals(fkAnuncio)){
-//                return  "Valor Diaria: " + diaria.calcularPorPeriodo(d,qtdOspedagem) +
-//                        "\nValor Semanal: " + semanal.calcularPorPeriodo(d,qtdOspedagem) +
-//                        "\nValor Mensal: " + mensal.calcularPorPeriodo(d,qtdOspedagem);
-//            }
-//        }
-//        return "";
-//    }
 }

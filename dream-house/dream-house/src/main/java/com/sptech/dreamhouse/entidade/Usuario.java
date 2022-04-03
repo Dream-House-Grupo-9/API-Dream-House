@@ -19,7 +19,7 @@ public class Usuario {
 
     private boolean autenticado;
 
-@NotBlank
+    @NotBlank
     @Length(min = 3, max = 45)
     private String nome;
 
@@ -34,7 +34,7 @@ public class Usuario {
             + "(?=\\S+$).{8,20}$")
     @NotBlank
     @Length(min = 8, max = 20)
-        private String senha;
+    private String senha;
 
 
     public Integer getCodigo() {
