@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class DetalhesAnuncioControle {
 
 
     @PostMapping
-    public ResponseEntity cadastrarDetalhesAnuncio(@RequestBody DetalhesAnuncio detalhe) {
+    public ResponseEntity cadastrarDetalhesAnuncio(@Valid @RequestBody DetalhesAnuncio detalhe) {
         if (detalhe != null) {
             repository.save(detalhe);
             return ResponseEntity.status(201).build();
@@ -50,7 +51,7 @@ public class DetalhesAnuncioControle {
 
 
     @PutMapping("/{codigo}")
-    public ResponseEntity atualizaDetalhesAnuncio(@PathVariable Integer codigo,
+    public ResponseEntity atualizaDetalhesAnuncio(@Valid @PathVariable Integer codigo,
                                           @RequestBody DetalhesAnuncio detalhesAnuncioAtuaslizado) {
         if (repository.existsById(codigo)) {
 
@@ -65,7 +66,7 @@ public class DetalhesAnuncioControle {
 
 
     @DeleteMapping("/{codigo}")
-    public ResponseEntity deletarDetalheAnuncio(@PathVariable Integer codigo) {
+    public ResponseEntity deletarDetalheAnuncio(@Valid @PathVariable Integer codigo) {
 
         if (repository.existsById(codigo)) {
             repository.deleteById(codigo);
@@ -75,27 +76,4 @@ public class DetalhesAnuncioControle {
         return ResponseEntity.status(404).build();
     }
 
-
-//    @GetMapping("/orcamento/{fkAnuncio}/{qtdOspedagem}")
-//    public ResponseEntity consultarOrcamento(
-//            @PathVariable int fkAnuncio,
-//            @PathVariable int qtdOspedagem) {
-//
-//        return ResponseEntity.status(200).body(fazerOrcamento(detalhes,fkAnuncio,qtdOspedagem));
-//    }
-
-//    public String fazerOrcamento(List<DetalhesAnuncio> lista, Integer fkAnuncio, Integer qtdOspedagem) {
-//        Diaria diaria = new Diaria();
-//        Semanal semanal = new Semanal();
-//        Mensal mensal = new Mensal();
-//
-//        for(DetalhesAnuncio d : detalhes){
-//            if(d.getFkAnuncio().equals(fkAnuncio)){
-//                return  "Valor Diaria: " + diaria.calcularPorPeriodo(d,qtdOspedagem) +
-//                        "\nValor Semanal: " + semanal.calcularPorPeriodo(d,qtdOspedagem) +
-//                        "\nValor Mensal: " + mensal.calcularPorPeriodo(d,qtdOspedagem);
-//            }
-//        }
-//        return "";
-//    }
 }

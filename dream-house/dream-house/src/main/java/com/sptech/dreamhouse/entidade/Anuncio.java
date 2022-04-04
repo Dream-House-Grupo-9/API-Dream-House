@@ -1,9 +1,16 @@
 package com.sptech.dreamhouse.entidade;
 
+import com.sun.istack.NotNull;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 
 @Entity
@@ -14,15 +21,38 @@ public class Anuncio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAnuncio;
 
+    @PastOrPresent
     private LocalDate dtPublicacao;
+
+    @Length(min = 20, max = 300)
+    @NotBlank
     private String descricao;
+
+    @FutureOrPresent
     private LocalDate inicioDisponibilidade;
+    @FutureOrPresent
     private LocalDate finalDisponibilidade;
+
+    @NotBlank
+    @NotNull
+    @Length(min = 3, max = 60)
     private String cidade;
+    @NotBlank
+    @NotNull
+    @Length(min = 3, max = 60)
     private String bairro;
+    @NotBlank
+    @NotNull
+    @Length(min = 8, max = 60)
     private String lougadoro;
+    @Positive
+    @NotBlank
+    @NotNull
+    @Length( max = 10)
     private String numero;
+    @NotNull
     private int fkCategoria;
+    @NotNull
     private int fkCliente;
 
     public void setIdAnuncio(Integer idAnuncio) {

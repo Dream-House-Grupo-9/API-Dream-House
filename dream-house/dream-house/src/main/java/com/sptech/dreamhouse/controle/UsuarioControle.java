@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class UsuarioControle {
 
 
     @PostMapping
-    public ResponseEntity cadastrarUsuario(@RequestBody Usuario novoUsuario) {
+    public ResponseEntity cadastrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
 
         if (novoUsuario != null) {
             repository.save(novoUsuario);
@@ -43,7 +44,7 @@ public class UsuarioControle {
 
 
     @PutMapping("/{codigo}")
-    public ResponseEntity atualizaUsuario(@PathVariable Integer codigo, @RequestBody Usuario usuarioAtualizado) {
+    public ResponseEntity atualizaUsuario(@Valid @PathVariable Integer codigo, @RequestBody Usuario usuarioAtualizado) {
         if (repository.existsById(codigo)) {
 
             usuarioAtualizado.setCodigo(codigo);
@@ -65,7 +66,7 @@ public class UsuarioControle {
 
 
     @DeleteMapping("/{codigo}")
-    public ResponseEntity deletarUsuario(@PathVariable Integer codigo) {
+    public ResponseEntity deletarUsuario(@Valid @PathVariable Integer codigo) {
 
         if (repository.existsById(codigo)) {
             repository.deleteById(codigo);
@@ -77,7 +78,7 @@ public class UsuarioControle {
 
 
     @PostMapping("/autenticacao")
-    public ResponseEntity fazerLogin(@RequestBody AutenticacaoUsuarioRequisicao user) {
+    public ResponseEntity fazerLogin(@Valid @RequestBody AutenticacaoUsuarioRequisicao user) {
         Integer codigoValido = repository.validaCodigo(user.getEmail(), user.getSenha());
 
         if (repository.getById(codigoValido).isAutenticado()) {
@@ -91,7 +92,7 @@ public class UsuarioControle {
 
 
     @DeleteMapping("/desaltenticacao")
-    public ResponseEntity fazerLogoff(@RequestBody AutenticacaoUsuarioRequisicao user) {
+    public ResponseEntity fazerLogoff(@Valid @RequestBody AutenticacaoUsuarioRequisicao user) {
         Integer codigoValido = repository.validaCodigo(user.getEmail(), user.getSenha());
 
         if (repository.getById(codigoValido).isAutenticado()) {
