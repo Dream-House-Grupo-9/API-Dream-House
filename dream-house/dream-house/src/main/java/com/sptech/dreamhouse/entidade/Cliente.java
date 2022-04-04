@@ -1,6 +1,10 @@
 package com.sptech.dreamhouse.entidade;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import org.hibernate.validator.constraints.Length;
+>>>>>>> dev-anderson
 =======
 import org.hibernate.validator.constraints.Length;
 >>>>>>> dev-anderson
@@ -11,12 +15,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.validation.constraints.*;
 =======
+=======
+>>>>>>> dev-anderson
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
+<<<<<<< HEAD
+>>>>>>> dev-anderson
+=======
 >>>>>>> dev-anderson
 import java.time.LocalDate;
 
@@ -28,6 +38,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCliente;
 <<<<<<< HEAD
+<<<<<<< HEAD
     @CPF
     private String cpf;
     @PastOrPresent
@@ -35,6 +46,19 @@ public class Cliente {
     private LocalDate dtNascimento;
     @NotBlank
     @Email
+=======
+
+    @CPF
+    @NotBlank
+    @Length(min = 11)
+    private String cpf;
+    @Past
+    @NotBlank
+    private LocalDate dtNascimento;
+    @Email
+    @NotBlank
+    @Length(min = 11, max = 50)
+>>>>>>> dev-anderson
 =======
 
     @CPF
@@ -57,12 +81,18 @@ public class Cliente {
 
     private String telefone;
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})", message = "Informe um telefone válido com ou sem DDD")
 =======
+=======
+>>>>>>> dev-anderson
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
             message = "Informe um telefone válido com ou sem ddd")
     @NotBlank
     @Length(min = 15, max = 20)
+<<<<<<< HEAD
+>>>>>>> dev-anderson
+=======
 >>>>>>> dev-anderson
     private String whatsapp;
 
