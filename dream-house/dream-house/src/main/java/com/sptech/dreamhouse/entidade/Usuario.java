@@ -33,7 +33,12 @@ public class Usuario {
     @Pattern(regexp = "^(?=.*[0-9])"
             + "(?=.*[a-z])(?=.*[A-Z])"
             + "(?=.*[!@#$%¨&*()_+`^{}?:;><,.|])"
-            + "(?=\\S+$).{8,20}$")
+            + "(?=\\S+$).{8,20}$",
+            message = "Um caracter especial" +
+                    " \nUma letra maiuscula" +
+                    " \nUm número " +
+                    "\nConter no minimo 8 digitos")
+
     @NotBlank
     @Length(min = 8, max = 20)
     private String senha;
