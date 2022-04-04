@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
@@ -27,7 +28,9 @@ public class Anuncio {
     @NotBlank
     private String descricao;
 
+    @FutureOrPresent
     private LocalDate inicioDisponibilidade;
+    @FutureOrPresent
     private LocalDate finalDisponibilidade;
 
     @NotBlank

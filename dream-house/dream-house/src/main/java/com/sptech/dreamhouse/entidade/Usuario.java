@@ -9,18 +9,20 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Positive
     private Integer codigo;
 
     private boolean autenticado;
 
     @NotBlank
-    @Length(min = 3, max = 45)
+    @Length(min = 3, max = 200)
     private String nome;
 
     @Email
