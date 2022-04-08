@@ -79,30 +79,33 @@ public class UsuarioControle {
 
     @PostMapping("/autenticacao")
     public ResponseEntity fazerLogin(@Valid @RequestBody AutenticacaoUsuarioRequisicao user) {
-        Integer codigoValido = repository.validaCodigo(user.getEmail(), user.getSenha());
+        Usuario usuario = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
 
-        if (repository.getById(codigoValido).isAutenticado()) {
-            return ResponseEntity.status(404).body("Usuário já se encontra autenticado");
+        if (usuario == null) {
+            return ResponseEntity.status(400).build();
         } else {
-            repository.setAutenticacao(true, codigoValido);
+            if(usuario.isAutenticado()){
+                repository.setAutenticacao(true,usuario.getCodigo());
+                return ResponseEntity.status(200).build();
+            }else{
+                return ResponseEntity.status(404).build();
+            }
 
-            return ResponseEntity.status(200).build();
         }
     }
 
 
     @DeleteMapping("/desaltenticacao")
     public ResponseEntity fazerLogoff(@Valid @RequestBody AutenticacaoUsuarioRequisicao user) {
-        Integer codigoValido = repository.validaCodigo(user.getEmail(), user.getSenha());
+        Usuario usuario = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
 
-        if (repository.getById(codigoValido).isAutenticado()) {
-            repository.setAutenticacao(false, codigoValido);
+        if (usuario.isAutenticado()) {
+            repository.setAutenticacao(false,usuario.getCodigo());
             return ResponseEntity.status(200).build();
 
         } else {
             return ResponseEntity.status(404).build();
         }
     }
-
 
 }

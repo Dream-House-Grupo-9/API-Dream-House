@@ -9,9 +9,7 @@ import javax.transaction.Transactional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    @Query("select u.codigo from Usuario u where u.email = ?1 and u.senha = ?2")
-    Integer validaCodigo(String email, String senha);
-
+    Usuario findByEmailAndSenha(String email, String senha);
 
     @Transactional
     @Modifying
