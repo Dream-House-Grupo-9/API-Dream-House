@@ -76,5 +76,12 @@ public class AnuncioControle {
         return ResponseEntity.status(404).build();
     }
 
-
+    @GetMapping("/filter/{cidade}")
+    public ResponseEntity <List<Anuncio>> filtroCidade(@PathVariable String cidade){
+        List<Anuncio> anuncios = repository.findAll();
+        if(anuncios.isEmpty()){
+            return ResponseEntity.status(204).body(repository.findByCidade(cidade));
+        }
+        return ResponseEntity.status(200).body(repository.findByCidade(cidade));
+    }
 }
