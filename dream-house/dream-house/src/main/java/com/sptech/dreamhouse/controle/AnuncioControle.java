@@ -31,7 +31,7 @@ public class AnuncioControle {
 
 
     @GetMapping
-    private ResponseEntity listaAnuncio(){
+    private ResponseEntity <List<Anuncio>> listaAnuncio(){
         List<Anuncio> anuncios = repository.findAll();
 
         if(anuncios.isEmpty()){

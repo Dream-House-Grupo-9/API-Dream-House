@@ -20,7 +20,7 @@ public class UsuarioControle {
 
 
     @GetMapping
-    public ResponseEntity listarUsuarios() {
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
         List<Usuario> usuarios = repository.findAll();
 
         if (usuarios.isEmpty()) {

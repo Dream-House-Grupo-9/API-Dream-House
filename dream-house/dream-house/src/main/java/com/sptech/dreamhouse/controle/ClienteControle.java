@@ -27,7 +27,7 @@ public class ClienteControle {
     }
 
     @GetMapping
-    public ResponseEntity getClientes(){
+    public ResponseEntity<List<Cliente>> getClientes(){
         List<Cliente> clientes = repository.findAll();
 
         if(clientes.isEmpty()){
