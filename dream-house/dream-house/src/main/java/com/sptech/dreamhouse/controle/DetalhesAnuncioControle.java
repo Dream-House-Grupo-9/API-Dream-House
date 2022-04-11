@@ -32,7 +32,7 @@ public class DetalhesAnuncioControle {
 
 
     @GetMapping
-    public ResponseEntity listarDetalhes() {
+    public ResponseEntity<List<DetalhesAnuncio>> listarDetalhes() {
         List<DetalhesAnuncio> detalhes = repository.findAll();
         if (detalhes.isEmpty()) {
             return ResponseEntity.status(204).body(detalhes);
