@@ -44,7 +44,8 @@ public class UsuarioControle {
 
 
     @PutMapping("/{codigo}")
-    public ResponseEntity atualizaUsuario(@Valid @PathVariable Integer codigo, @RequestBody Usuario usuarioAtualizado) {
+    public ResponseEntity atualizaUsuario(@Valid @PathVariable Integer codigo,
+                                          @RequestBody Usuario usuarioAtualizado) {
         if (repository.existsById(codigo)) {
 
             usuarioAtualizado.setCodigo(codigo);
