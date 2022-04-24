@@ -40,11 +40,15 @@ public class Anuncio {
 
     @NotBlank
     @Length(min = 8, max = 60)
-    private String lougadoro;
+    private String logradouro;
 
     @Positive
 //    @Length( max = 10)
     private int numero;
+
+    @NotBlank
+    @Length(min = 4)
+    private String tipoImovel;
 
 
     public void setIdAnuncio(Integer idAnuncio) {
@@ -83,8 +87,8 @@ public class Anuncio {
         this.bairro = bairro;
     }
 
-    public void setLougadoro(String lougadoro) {
-        this.lougadoro = lougadoro;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
 
@@ -116,9 +120,13 @@ public class Anuncio {
         return bairro;
     }
 
-    public String getLougadoro() {
-        return lougadoro;
+    public String getLogradouro() {
+        return logradouro;
     }
 
+    public String getTipoImovel() { return tipoImovel; }
 
+    public void setTipoImovel(String tipoImovel) {
+        this.tipoImovel = tipoImovel;
+    }
 }

@@ -84,4 +84,22 @@ public class AnuncioControle {
         }
         return ResponseEntity.status(200).body(repository.findByCidade(cidade));
     }
+
+    @GetMapping("/exportar-anuncio")
+    public ResponseEntity anuncio() {
+        List<Anuncio> lista = repository.findAll();
+        String relatorio = "";
+        for (Anuncio anuncio : lista) {
+            relatorio += ""+anuncio.getIdAnuncio()+", "+anuncio.getDtPublicacao()+", "+anuncio.getDescricao()+", " +
+                    ""+anuncio.getInicioDisponibilidade()+", "+anuncio.getFinalDisponibilidade()+", " +
+                    ""+anuncio.getCidade()+", "+anuncio.getBairro()+", "+anuncio.getLogradouro()+", " +
+                    ""+anuncio.getNumero()+", "+anuncio.getTipoImovel()+"\r\n";
+        }
+        return ResponseEntity
+                .status(200)
+                .header("content-type", "text/csv")
+                .header("content-disposition", "filename=\"relatorio-de-anuncios.csv\"")
+                .body(relatorio);
+    }
+
 }

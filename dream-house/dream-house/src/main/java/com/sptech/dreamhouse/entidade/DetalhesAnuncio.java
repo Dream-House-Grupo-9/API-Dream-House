@@ -28,7 +28,7 @@ public class DetalhesAnuncio {
 
     @Positive
     @NotNull
-    private int qtdDromitorios;
+    private int qtdDormitorios;
 
     @Positive
     @NotNull
@@ -109,13 +109,9 @@ public class DetalhesAnuncio {
         this.valorMensal = valorMensal;
     }
 
-    public int getQtdDromitorios() {
-        return qtdDromitorios;
-    }
+    public int getQtdDormitorios() { return qtdDormitorios; }
 
-    public void setQtdDromitorios(int qtdDromitorios) {
-        this.qtdDromitorios = qtdDromitorios;
-    }
+    public void setQtdDormitorios(int qtdDormitorios) { this.qtdDormitorios = qtdDormitorios; }
 
     public int getQtdToaletes() {
         return qtdToaletes;

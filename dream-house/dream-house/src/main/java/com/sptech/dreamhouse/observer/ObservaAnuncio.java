@@ -1,8 +1,8 @@
-package com.sptech.dreamhouse.obsever;
+package com.sptech.dreamhouse.observer;
 
 
 
-public class ObservaAnuncio implements Obsever{
+public class ObservaAnuncio implements Observer {
 
 
     @Override

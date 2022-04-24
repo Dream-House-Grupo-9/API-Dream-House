@@ -1,8 +1,8 @@
 package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.DetalhesAnuncio;
-import com.sptech.dreamhouse.obsever.ObservaAnuncio;
-import com.sptech.dreamhouse.obsever.Subescreve;
+import com.sptech.dreamhouse.observer.ObservaAnuncio;
+import com.sptech.dreamhouse.observer.Subscreve;
 import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/detalhes-anuncio")
 public class DetalhesAnuncioControle {
 
-   Subescreve subescreve = new Subescreve();
+   Subscreve subscreve = new Subscreve();
 
    ObservaAnuncio observador = new ObservaAnuncio();
 
@@ -29,13 +29,13 @@ public class DetalhesAnuncioControle {
     @PostMapping
     public ResponseEntity cadastrarDetalhesAnuncio(@Valid @RequestBody DetalhesAnuncio detalhe) {
 
-        subescreve.addObservador(observador);
+        subscreve.addObservador(observador);
 
         if (detalhe != null) {
 
             repository.save(detalhe);
 
-            subescreve.notificarObs();
+            subscreve.notificarObs();
 
             return ResponseEntity.status(201).build();
         }
@@ -87,6 +87,25 @@ public class DetalhesAnuncioControle {
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(404).build();
+    }
+
+    @GetMapping("/exportar-detalhes-anuncio")
+    public ResponseEntity detalhes() {
+        List<DetalhesAnuncio> lista = repository.findAll();
+        String relatorio = "";
+        for (DetalhesAnuncio detalhesAnuncio : lista) {
+            relatorio += ""+detalhesAnuncio.getIdDetalhesAnuncio()+", "+detalhesAnuncio.isAtivoDiaria()+"," +
+                    ""+detalhesAnuncio.isAtivoSemanal()+", "+detalhesAnuncio.isAtivoMensal()+"," +
+                    ""+detalhesAnuncio.getValorDiaria()+", "+detalhesAnuncio.getValorSemanal()+"," +
+                    ""+detalhesAnuncio.getValorMensal()+", "+detalhesAnuncio.getQtdDormitorios()+"," +
+                    ""+detalhesAnuncio.getQtdToaletes()+", "+detalhesAnuncio.isGaragem()+", " +
+                    ""+detalhesAnuncio.isAreaDeTrabalho()+" ,"+detalhesAnuncio.isMobiliada()+"\r\n";
+        }
+        return ResponseEntity
+                .status(200)
+                .header("content-type", "text/csv")
+                .header("content-disposition", "filename=\"relatorio-do-detalhes-de-anuncios.csv\"")
+                .body(relatorio);
     }
 
 }
