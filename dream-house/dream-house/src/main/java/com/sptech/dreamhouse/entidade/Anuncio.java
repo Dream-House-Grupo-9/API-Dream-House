@@ -1,12 +1,7 @@
 package com.sptech.dreamhouse.entidade;
 
-import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -18,6 +13,7 @@ import java.time.LocalDate;
 public class Anuncio {
 
     @Id
+//    @Column(name = "id_anuncio")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAnuncio;
 
@@ -30,30 +26,26 @@ public class Anuncio {
 
     @FutureOrPresent
     private LocalDate inicioDisponibilidade;
+
     @FutureOrPresent
     private LocalDate finalDisponibilidade;
 
     @NotBlank
-    @NotNull
     @Length(min = 3, max = 60)
     private String cidade;
+
     @NotBlank
-    @NotNull
     @Length(min = 3, max = 60)
     private String bairro;
+
     @NotBlank
-    @NotNull
     @Length(min = 8, max = 60)
     private String lougadoro;
+
     @Positive
-    @NotBlank
-    @NotNull
-    @Length( max = 10)
-    private String numero;
-    @NotNull
-    private int fkCategoria;
-    @NotNull
-    private int fkCliente;
+//    @Length( max = 10)
+    private int numero;
+
 
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
@@ -75,6 +67,14 @@ public class Anuncio {
         this.finalDisponibilidade = finalDisponibilidade;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
@@ -87,17 +87,6 @@ public class Anuncio {
         this.lougadoro = lougadoro;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public void setFkCategoria(int fkCategoria) {
-        this.fkCategoria = fkCategoria;
-    }
-
-    public void setFkCliente(int fkCliente) {
-        this.fkCliente = fkCliente;
-    }
 
     public int getIdAnuncio() {
         return idAnuncio;
@@ -131,15 +120,5 @@ public class Anuncio {
         return lougadoro;
     }
 
-    public String getNumero() {
-        return numero;
-    }
 
-    public int getFkCategoria() {
-        return fkCategoria;
-    }
-
-    public int getFkCliente() {
-        return fkCliente;
-    }
 }

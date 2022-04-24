@@ -16,6 +16,7 @@ public class CategoriaImovel {
     @NotBlank
     private String categoria;
 
+
     public Integer getIdCategoria() {
         return idCategoria;
     }

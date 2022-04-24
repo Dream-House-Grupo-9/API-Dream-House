@@ -25,9 +25,11 @@ public class Cliente {
     @NotBlank
     @Length(min = 11)
     private String cpf;
+
     @Past
     @NotBlank
     private LocalDate dtNascimento;
+
     @Email
     @NotBlank
     @Length(min = 11, max = 50)
@@ -37,8 +39,8 @@ public class Cliente {
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
             message = "Informe um telefone válido com ou sem ddd")
     @Length(min = 15, max = 20)
-
     private String telefone;
+
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
             message = "Informe um telefone válido com ou sem ddd")
     @NotBlank

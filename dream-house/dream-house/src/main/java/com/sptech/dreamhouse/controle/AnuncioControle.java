@@ -1,7 +1,6 @@
 package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.Anuncio;
-import com.sptech.dreamhouse.entidade.Usuario;
 import com.sptech.dreamhouse.repositorio.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

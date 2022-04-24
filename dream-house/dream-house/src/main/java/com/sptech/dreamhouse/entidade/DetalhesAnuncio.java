@@ -1,11 +1,6 @@
 package com.sptech.dreamhouse.entidade;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -22,24 +17,41 @@ public class DetalhesAnuncio {
     @Positive
     @NotNull
     private double valorDiaria;
+
     @Positive
     @NotNull
     private double valorSemanal;
+
     @Positive
     @NotNull
     private double valorMensal;
+
     @Positive
     @NotNull
     private int qtdDromitorios;
+
     @Positive
     @NotNull
     private int qtdToaletes;
-    private boolean garagem;
-    private boolean areaDeTrabalho;
-    private boolean mobiliada;
-    @NotNull
-    private Integer fkAnuncio;
 
+    private boolean garagem;
+
+    private boolean areaDeTrabalho;
+
+    private boolean mobiliada;
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(referencedColumnName = "id_anuncio")
+//    private Anuncio anuncio;
+
+
+//    public Anuncio getAnuncio() {
+//        return anuncio;
+//    }
+//
+//    public void setAnuncio(Anuncio anuncio) {
+//        this.anuncio = anuncio;
+//    }
 
     public Integer getIdDetalhesAnuncio() {
         return idDetalhesAnuncio;
@@ -137,11 +149,4 @@ public class DetalhesAnuncio {
         this.mobiliada = mobiliada;
     }
 
-    public Integer getFkAnuncio() {
-        return fkAnuncio;
-    }
-
-    public void setFkAnuncio(Integer fkAnuncio) {
-        this.fkAnuncio = fkAnuncio;
-    }
 }
