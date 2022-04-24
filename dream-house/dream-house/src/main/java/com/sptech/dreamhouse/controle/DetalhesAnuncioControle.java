@@ -2,46 +2,22 @@ package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.DetalhesAnuncio;
 import com.sptech.dreamhouse.obsever.ObservaAnuncio;
-import com.sptech.dreamhouse.obsever.Obsever;
 import com.sptech.dreamhouse.obsever.Subescreve;
-import com.sptech.dreamhouse.repositorio.AnuncioRepository;
 import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import javax.validation.Valid;
-
-import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/detalhes-anuncio")
-public class DetalhesAnuncioControle extends Subescreve{
+public class DetalhesAnuncioControle {
 
-    ArrayList<Obsever> observadores = new ArrayList<>();
+   Subescreve subescreve = new Subescreve();
 
-    ObservaAnuncio obiservador = new ObservaAnuncio();
-
-
-    public void inscrever(Obsever obs){
-        if(!observadores.contains(obs)){
-
-            observadores.add(obs);
-        }
-    }
-
-    public void subscrever(Obsever obs){
-        observadores.remove(obs);
-    }
-
-    public void notificarObs(Integer fk){
-         for(Obsever obs : observadores){
-             obs.enviaNotificacao(fk);
-         }
-    }
-
+   ObservaAnuncio observador = new ObservaAnuncio();
 
     @Autowired
     private DetalhesAnuncioRepository repository;
@@ -53,13 +29,13 @@ public class DetalhesAnuncioControle extends Subescreve{
     @PostMapping
     public ResponseEntity cadastrarDetalhesAnuncio(@Valid @RequestBody DetalhesAnuncio detalhe) {
 
-        inscrever(obiservador);
+        subescreve.addObservador(observador);
 
         if (detalhe != null) {
 
             repository.save(detalhe);
 
-            notificarObs(1);
+            subescreve.notificarObs();
 
             return ResponseEntity.status(201).build();
         }

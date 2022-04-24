@@ -7,7 +7,6 @@ public class Subescreve {
     ArrayList<Obsever> observadores = new ArrayList<>();
 
 
-
     public void addObservador(Obsever obs){
         if(!observadores.contains(obs)){
 
@@ -19,9 +18,9 @@ public class Subescreve {
         observadores.remove(obs);
     }
 
-    public void notificarObs(Integer fk){
+    public void notificarObs(){
         for (Obsever obs : observadores) {
-            obs.enviaNotificacao(fk);
+            obs.enviaNotificacao();
         }
     }
 

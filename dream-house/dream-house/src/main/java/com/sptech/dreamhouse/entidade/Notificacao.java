@@ -1,60 +1,43 @@
 package com.sptech.dreamhouse.entidade;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
-
 
 @Entity
 public class Notificacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codigo;
+    private Integer idNotificacao;
 
     @NotBlank
-    private String tipoNotificacao;
-
-    @NotBlank
-    @Max(100)
-    private String conteudo;
-
-    private Integer fkRecurso;
+    @Length(max = 200)
+    private String mensagem;
 
 
-    public Integer getFkRecurso() {
-        return fkRecurso;
+    public Notificacao(Integer idNotificacao, String mensagem) {
+        this.idNotificacao = idNotificacao;
+        this.mensagem = mensagem;
     }
 
-    public void setFkRecurso(Integer fkRecurso) {
-        this.fkRecurso = fkRecurso;
+    public Integer getIdNotificacao() {
+        return idNotificacao;
     }
 
-    public String getConteudo() {
-        return conteudo;
+    public void setIdNotificacao(Integer idNotificacao) {
+        this.idNotificacao = idNotificacao;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
+    public String getMensagem() {
+        return mensagem;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getTipoNotificacao() {
-        return tipoNotificacao;
-    }
-
-    public void setTipoNotificacao(String tipoNotificacao) {
-        this.tipoNotificacao = tipoNotificacao;
-    }
-
 }
