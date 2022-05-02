@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
 
@@ -35,8 +35,12 @@ public class UsuarioControle {
     public ResponseEntity cadastrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
 
         if (novoUsuario != null) {
-            repository.save(novoUsuario);
-            return ResponseEntity.status(201).build();
+            if(repository.existsByEmail(novoUsuario.getEmail())){
+                return ResponseEntity.notFound().build();
+            } else {
+                repository.save(novoUsuario);
+                return ResponseEntity.status(201).build();
+            }
         }
 
         return ResponseEntity.status(400).build();
@@ -78,7 +82,7 @@ public class UsuarioControle {
     }
 
 
-    @PostMapping("/autenticacao")
+    @PostMapping("/login")
     public ResponseEntity fazerLogin(@Valid @RequestBody AutenticacaoUsuarioRequisicao user) {
         Usuario usuario = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
 
@@ -96,7 +100,7 @@ public class UsuarioControle {
     }
 
 
-    @DeleteMapping("/desaltenticacao")
+    @DeleteMapping("/logout")
     public ResponseEntity fazerLogoff(@Valid @RequestBody AutenticacaoUsuarioRequisicao user) {
         Usuario usuario = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
 
