@@ -1,2 +1,2 @@
 # API-Dream-House
-API para o web site
+Repositório criado para armazenar a API para o web site.
