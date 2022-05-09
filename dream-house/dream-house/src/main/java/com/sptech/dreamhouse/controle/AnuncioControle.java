@@ -6,6 +6,7 @@ import com.sptech.dreamhouse.entidade.ImagemAnuncio;
 import com.sptech.dreamhouse.repositorio.AnuncioRepository;
 import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
 import com.sptech.dreamhouse.repositorio.ImagemAnuncioRepository;
+import com.sptech.dreamhouse.resposta.ConsultaCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ public class  AnuncioControle {
 
     @Autowired
     private AnuncioRepository repository;
+
+    @Autowired
+    private DetalhesAnuncioRepository repositoryDetalhes;
 
     @PostMapping
     private ResponseEntity cadastraAnuncio(
@@ -43,6 +47,17 @@ public class  AnuncioControle {
 
         return ResponseEntity.status(200).body(anuncios);
     }
+
+//    @GetMapping("/card-anuncio")
+//    public ResponseEntity listaCardsAnuncio(){
+//        ConsultaCard anunciosCard = repositoryDetalhes.consultaItensCard(1);
+//
+//        if(anunciosCard != null){
+//            return ResponseEntity.status(204).body(anunciosCard);
+//        }
+//
+//        return ResponseEntity.status(200).body(anunciosCard);
+//    }
 
     @DeleteMapping
     public ResponseEntity deletarTodos(){
