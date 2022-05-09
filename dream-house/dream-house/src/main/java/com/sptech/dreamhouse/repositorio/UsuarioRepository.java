@@ -16,4 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("update Usuario u set u.autenticado = ?1 where u.codigo = ?2")
     void setAutenticacao(boolean autentica, Integer codigo);
 
+    boolean existsByEmail(String email);
+
 }
