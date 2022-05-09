@@ -3,6 +3,7 @@ package com.sptech.dreamhouse.controle;
 import com.sptech.dreamhouse.entidade.DetalhesAnuncio;
 import com.sptech.dreamhouse.observer.ObservaAnuncio;
 import com.sptech.dreamhouse.observer.Subscreve;
+import com.sptech.dreamhouse.repositorio.AnuncioRepository;
 import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,27 +16,22 @@ import java.util.List;
 @RequestMapping("/detalhes-anuncio")
 public class DetalhesAnuncioControle {
 
-   Subscreve subscreve = new Subscreve();
-
-   ObservaAnuncio observador = new ObservaAnuncio();
 
     @Autowired
     private DetalhesAnuncioRepository repository;
 
-//    @Autowired
-//    private AnuncioRepository repositoryAnuncio;
+    @Autowired
+    private AnuncioRepository repositoryAnuncio;
 
 
     @PostMapping
     public ResponseEntity cadastrarDetalhesAnuncio(@Valid @RequestBody DetalhesAnuncio detalhe) {
 
-        subscreve.addObservador(observador);
 
         if (detalhe != null) {
 
             repository.save(detalhe);
 
-            subscreve.notificarObs();
 
             return ResponseEntity.status(201).build();
         }

@@ -40,18 +40,17 @@ public class DetalhesAnuncio {
 
     private boolean mobiliada;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(referencedColumnName = "id_anuncio")
-//    private Anuncio anuncio;
+    @OneToOne
+    private Anuncio anuncio;
 
 
-//    public Anuncio getAnuncio() {
-//        return anuncio;
-//    }
-//
-//    public void setAnuncio(Anuncio anuncio) {
-//        this.anuncio = anuncio;
-//    }
+    public Anuncio getAnuncio() {
+        return anuncio;
+    }
+
+    public void setAnuncio(Anuncio anuncio) {
+        this.anuncio = anuncio;
+    }
 
     public Integer getIdDetalhesAnuncio() {
         return idDetalhesAnuncio;

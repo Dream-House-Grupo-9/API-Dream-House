@@ -1,6 +1,7 @@
 package com.sptech.dreamhouse.repositorio;
 
 import com.sptech.dreamhouse.entidade.Anuncio;
+import com.sptech.dreamhouse.entidade.ImagemAnuncio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

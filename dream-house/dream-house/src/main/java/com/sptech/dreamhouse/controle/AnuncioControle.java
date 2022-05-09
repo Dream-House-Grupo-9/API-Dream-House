@@ -1,7 +1,11 @@
 package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.Anuncio;
+import com.sptech.dreamhouse.entidade.DetalhesAnuncio;
+import com.sptech.dreamhouse.entidade.ImagemAnuncio;
 import com.sptech.dreamhouse.repositorio.AnuncioRepository;
+import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
+import com.sptech.dreamhouse.repositorio.ImagemAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +15,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/anuncios")
-public class AnuncioControle {
+public class  AnuncioControle {
 
     @Autowired
     private AnuncioRepository repository;
 
-
     @PostMapping
-    private ResponseEntity cadastraAnuncio(@Valid @RequestBody Anuncio novoAnuncio){
+    private ResponseEntity cadastraAnuncio(
+            @Valid @RequestBody Anuncio novoAnuncio
+    ){
          if(novoAnuncio != null){
              repository.save(novoAnuncio);
 
@@ -28,9 +33,8 @@ public class AnuncioControle {
          return ResponseEntity.status(400).build();
     }
 
-
     @GetMapping
-    private ResponseEntity <List<Anuncio>> listaAnuncio(){
+    public ResponseEntity <List<Anuncio>> listaAnuncio(){
         List<Anuncio> anuncios = repository.findAll();
 
         if(anuncios.isEmpty()){
@@ -39,7 +43,6 @@ public class AnuncioControle {
 
         return ResponseEntity.status(200).body(anuncios);
     }
-
 
     @DeleteMapping
     public ResponseEntity deletarTodos(){
@@ -93,7 +96,7 @@ public class AnuncioControle {
             relatorio += ""+anuncio.getIdAnuncio()+", "+anuncio.getDtPublicacao()+", "+anuncio.getDescricao()+", " +
                     ""+anuncio.getInicioDisponibilidade()+", "+anuncio.getFinalDisponibilidade()+", " +
                     ""+anuncio.getCidade()+", "+anuncio.getBairro()+", "+anuncio.getLogradouro()+", " +
-                    ""+anuncio.getNumero()+", "+anuncio.getTipoImovel()+"\r\n";
+                    ""+anuncio.getNumero()+", "+"Casa"+"\r\n";
         }
         return ResponseEntity
                 .status(200)

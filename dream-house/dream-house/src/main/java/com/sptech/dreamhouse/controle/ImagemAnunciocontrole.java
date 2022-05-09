@@ -6,27 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/imagens")
-public class ImagemAnunciocontrole {
+public class ImagemAnuncioControle {
 
     @Autowired
-    private ImagemAnuncioRepository repository;
+    private ImagemAnuncioRepository repositoryImg;
+
 
     @PostMapping
-    public ResponseEntity postImagem(@RequestBody ImagemAnuncio novaImagem){
+    public ResponseEntity postImagem(@Valid @RequestBody ImagemAnuncio novaImagem){
         if(novaImagem != null){
-            repository.save(novaImagem);
+            repositoryImg.save(novaImagem);
             return ResponseEntity.status(201).build();
         }
         return ResponseEntity.status(400).build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<ImagemAnuncio>> getImagen(){
-        List<ImagemAnuncio> imagens = repository.findAll();
+    @GetMapping("/{idAnuncio}")
+    public ResponseEntity<List<ImagemAnuncio>> listarImagensAnuncio(@PathVariable Integer idAnuncio){
+        List<ImagemAnuncio> imagens = repositoryImg.findByAnuncioIdAnuncio(idAnuncio);
 
         if(imagens.isEmpty()){
             return ResponseEntity.status(204).body(imagens);
@@ -34,9 +36,9 @@ public class ImagemAnunciocontrole {
         return ResponseEntity.status(200).body(imagens);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteCategoria(){
-        repository.deleteAll();
+    @DeleteMapping("/{idAnuncio}")
+    public ResponseEntity deletarImagem(@PathVariable Integer idImagem){
+        repositoryImg.deleteById(idImagem);
         return ResponseEntity.status(200).build();
     }
 }

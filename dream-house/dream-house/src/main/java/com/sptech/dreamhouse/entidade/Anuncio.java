@@ -13,7 +13,6 @@ import java.time.LocalDate;
 public class Anuncio {
 
     @Id
-//    @Column(name = "id_anuncio")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAnuncio;
 
@@ -46,9 +45,6 @@ public class Anuncio {
 //    @Length( max = 10)
     private int numero;
 
-    @NotBlank
-    @Length(min = 4)
-    private String tipoImovel;
 
 
     public void setIdAnuncio(Integer idAnuncio) {
@@ -124,9 +120,4 @@ public class Anuncio {
         return logradouro;
     }
 
-    public String getTipoImovel() { return tipoImovel; }
-
-    public void setTipoImovel(String tipoImovel) {
-        this.tipoImovel = tipoImovel;
-    }
 }
