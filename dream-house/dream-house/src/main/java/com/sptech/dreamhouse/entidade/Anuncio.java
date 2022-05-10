@@ -45,6 +45,9 @@ public class Anuncio {
 //    @Length( max = 10)
     private int numero;
 
+    public Anuncio(Integer idAnuncio, String dtPublicacao, String descricao, String inicioDisponibilidade,
+                   String finalDisponibilidade, String cidade, String bairro, String logradouro, Integer numero) {
+    }
 
 
     public void setIdAnuncio(Integer idAnuncio) {
