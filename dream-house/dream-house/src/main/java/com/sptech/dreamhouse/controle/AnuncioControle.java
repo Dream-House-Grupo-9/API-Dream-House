@@ -1,16 +1,15 @@
 package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.Anuncio;
-import com.sptech.dreamhouse.entidade.DetalhesAnuncio;
-import com.sptech.dreamhouse.entidade.ImagemAnuncio;
 import com.sptech.dreamhouse.repositorio.AnuncioRepository;
-import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
-import com.sptech.dreamhouse.repositorio.ImagemAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
+
+import static com.sptech.dreamhouse.exportacao.ExportacaoTxt.gravaArquivoTxt;
+import static com.sptech.dreamhouse.exportacao.ExportacaoTxt.leArquivoTxt;
 
 
 @RestController
@@ -104,5 +103,31 @@ public class  AnuncioControle {
                 .header("content-disposition", "filename=\"relatorio-de-anuncios.csv\"")
                 .body(relatorio);
     }
+
+    @GetMapping("/exportar-anuncio-txt")
+    public ResponseEntity anuncioTxt() {
+
+
+        List<Anuncio> lista = repository.findAll();
+        String relatorio = "";
+        for (Anuncio a : lista) {
+            relatorio += ""+a.getIdAnuncio()+", "+a.getDtPublicacao()+", "+a.getDescricao()+", " +
+                    ""+a.getInicioDisponibilidade()+", "+a.getFinalDisponibilidade()+", " +
+                    ""+a.getCidade()+", "+a.getBairro()+", "+a.getLogradouro()+", " +
+                    ""+a.getNumero()+", "+"\r\n";
+
+        }
+
+        gravaArquivoTxt(lista,"relatorio.txt");
+        leArquivoTxt("relatorio.txt");
+
+        return ResponseEntity
+                .status(200)
+                .header("content-type", "text/plain")
+                .header("content-disposition", "filename=\"relatorio.txt\"")
+                .body(relatorio);
+
+    }
+
 
 }

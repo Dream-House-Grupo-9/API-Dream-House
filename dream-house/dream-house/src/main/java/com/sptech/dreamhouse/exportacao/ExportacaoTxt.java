@@ -19,7 +19,6 @@ public class ExportacaoTxt {
             System.out.println("Erro ao abrir arquivo" + erro);
         }
 
-
         try {
             saida.append(registro + "\n");
             saida.close();
@@ -73,13 +72,11 @@ public class ExportacaoTxt {
 
         List<Anuncio> listaLida = new ArrayList<>();
 
-
         try {
             entrada = new BufferedReader(new FileReader(nomeArq));
         } catch (IOException erro) {
             System.out.println("Falha ao abrir arquivo" + erro);
         }
-
 
         try {
             registro = entrada.readLine();
@@ -117,12 +114,11 @@ public class ExportacaoTxt {
                     numero = Integer.valueOf(registro.substring(513, 517));
                     contaRegCorpoLido++;
 
-                    Anuncio a = new Anuncio(idAnuncio,dtPublicacao,descricao,inicioDisponibilidade,finalDisponibilidade,cidade,bairro,logradouro,numero);
+                    Anuncio a = new Anuncio(idAnuncio, dtPublicacao, descricao, inicioDisponibilidade, finalDisponibilidade, cidade, bairro, logradouro, numero);
                     listaLida.add(a);
                 } else {
                     System.out.println("Tipo de resgitro inválido");
                 }
-
                 registro = entrada.readLine();
             }
 
