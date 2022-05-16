@@ -1,6 +1,6 @@
 package com.sptech.dreamhouse.requisicao;
 
-public class AutenticacaoUsuarioRequisicao {
+public class AutenticacaoClienteRequisicao {
 
     private String email;
     private String senha;

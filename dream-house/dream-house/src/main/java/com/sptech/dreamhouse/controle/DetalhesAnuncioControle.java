@@ -1,8 +1,6 @@
 package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.DetalhesAnuncio;
-import com.sptech.dreamhouse.observer.ObservaAnuncio;
-import com.sptech.dreamhouse.observer.Subscreve;
 import com.sptech.dreamhouse.repositorio.AnuncioRepository;
 import com.sptech.dreamhouse.repositorio.DetalhesAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

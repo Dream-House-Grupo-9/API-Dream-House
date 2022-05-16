@@ -1,25 +1,29 @@
 package com.sptech.dreamhouse.entidade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
-
 public class Anuncio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAnuncio;
 
+    @NotBlank
+    @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
+            message = "Informe um telefone válido com ou sem ddd")
+    @Length(min = 15, max = 20)
+    private String telefoneLocatario;
+
     @PastOrPresent
     private LocalDate dtPublicacao;
 
-    @Length(min = 20, max = 300)
+    @Length(min = 10, max = 300)
     @NotBlank
     private String descricao;
 
@@ -45,26 +49,104 @@ public class Anuncio {
 //    @Length( max = 10)
     private int numero;
 
+    @JsonIgnore
+    @Column(length = 50 * 1024 * 1024) // 50 Mb
+    private byte[] foto;
 
+    @ManyToOne
+    @NotNull
+    private Cliente cliente;
+
+    @OneToOne
+    private DetalhesAnuncio detalhe;
+
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public DetalhesAnuncio getDetalhe() {
+        return detalhe;
+    }
+
+    public void setDetalhe(DetalhesAnuncio detalhe) {
+        this.detalhe = detalhe;
+    }
+
+    public Integer getIdAnuncio() {
+        return idAnuncio;
+    }
 
     public void setIdAnuncio(Integer idAnuncio) {
         this.idAnuncio = idAnuncio;
+    }
+
+    public String getTelefoneLocatario() {
+        return telefoneLocatario;
+    }
+
+    public void setTelefoneLocatario(String telefoneLocatario) {
+        this.telefoneLocatario = telefoneLocatario;
+    }
+
+    public LocalDate getDtPublicacao() {
+        return dtPublicacao;
     }
 
     public void setDtPublicacao(LocalDate dtPublicacao) {
         this.dtPublicacao = dtPublicacao;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public LocalDate getInicioDisponibilidade() {
+        return inicioDisponibilidade;
     }
 
     public void setInicioDisponibilidade(LocalDate inicioDisponibilidade) {
         this.inicioDisponibilidade = inicioDisponibilidade;
     }
 
+    public LocalDate getFinalDisponibilidade() {
+        return finalDisponibilidade;
+    }
+
     public void setFinalDisponibilidade(LocalDate finalDisponibilidade) {
         this.finalDisponibilidade = finalDisponibilidade;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public int getNumero() {
@@ -75,49 +157,11 @@ public class Anuncio {
         this.numero = numero;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public byte[] getFoto() {
+        return foto;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-
-    public int getIdAnuncio() {
-        return idAnuncio;
-    }
-
-    public LocalDate getDtPublicacao() {
-        return dtPublicacao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public LocalDate getInicioDisponibilidade() {
-        return inicioDisponibilidade;
-    }
-
-    public LocalDate getFinalDisponibilidade() {
-        return finalDisponibilidade;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
 }

@@ -12,8 +12,11 @@ public class DetalhesAnuncio {
     private Integer idDetalhesAnuncio;
 
     private boolean ativoDiaria;
+
     private boolean ativoSemanal;
+
     private boolean ativoMensal;
+
     @Positive
     @NotNull
     private double valorDiaria;
@@ -40,17 +43,9 @@ public class DetalhesAnuncio {
 
     private boolean mobiliada;
 
-    @OneToOne
-    private Anuncio anuncio;
+    @NotNull
+    private String categoria;
 
-
-    public Anuncio getAnuncio() {
-        return anuncio;
-    }
-
-    public void setAnuncio(Anuncio anuncio) {
-        this.anuncio = anuncio;
-    }
 
     public Integer getIdDetalhesAnuncio() {
         return idDetalhesAnuncio;
@@ -108,9 +103,13 @@ public class DetalhesAnuncio {
         this.valorMensal = valorMensal;
     }
 
-    public int getQtdDormitorios() { return qtdDormitorios; }
+    public int getQtdDormitorios() {
+        return qtdDormitorios;
+    }
 
-    public void setQtdDormitorios(int qtdDormitorios) { this.qtdDormitorios = qtdDormitorios; }
+    public void setQtdDormitorios(int qtdDormitorios) {
+        this.qtdDormitorios = qtdDormitorios;
+    }
 
     public int getQtdToaletes() {
         return qtdToaletes;
@@ -144,4 +143,11 @@ public class DetalhesAnuncio {
         this.mobiliada = mobiliada;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }

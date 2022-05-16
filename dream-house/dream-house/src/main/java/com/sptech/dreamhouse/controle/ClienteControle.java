@@ -1,56 +1,120 @@
 package com.sptech.dreamhouse.controle;
 
-
 import com.sptech.dreamhouse.entidade.Cliente;
 import com.sptech.dreamhouse.repositorio.ClienteRepository;
+import com.sptech.dreamhouse.requisicao.AutenticacaoClienteRequisicao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.status;
+
+@CrossOrigin
 @RestController
 @RequestMapping("/clientes")
+
 public class ClienteControle {
 
     @Autowired
     private ClienteRepository repository;
 
-    @PostMapping
-    public ResponseEntity postCliente(@RequestBody Cliente novoCliente){
-        if(novoCliente != null){
-            repository.save(novoCliente);
-            return ResponseEntity.status(201).build();
-        }
-        return ResponseEntity.status(400).build();
-    }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> getClientes(){
-        List<Cliente> clientes = repository.findAll();
+    public ResponseEntity<List<Cliente>> listarUsuarios() {
+        List<Cliente> usuarios = repository.findAll();
 
-        if(clientes.isEmpty()){
-            return ResponseEntity.status(204).body(clientes);
+        if (usuarios.isEmpty()) {
+            return status(204).body(usuarios);
         }
-        return ResponseEntity.status(200).body(clientes);
+
+        return status(200).body(usuarios);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity updateCliente(@PathVariable Integer id, @RequestBody Cliente clienteAtualizado){
-        if(repository.existsById(id)){
-            clienteAtualizado.setIdCliente(id);
+
+    @PostMapping
+    public ResponseEntity cadastrarUsuario(@Valid @RequestBody Cliente novoUsuario) {
+
+        if (novoUsuario != null) {
+            if(repository.existsByEmail(novoUsuario.getEmail())){
+                return notFound().build();
+            } else {
+                repository.save(novoUsuario);
+                return status(201).build();
+            }
+        }
+
+        return status(400).build();
+    }
+
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity atualizaUsuario(@Valid @PathVariable Integer codigo,
+                                          @RequestBody Cliente clienteAtualizado) {
+        if (repository.existsById(codigo)) {
+
+            clienteAtualizado.setId(codigo);
             repository.save(clienteAtualizado);
-            return ResponseEntity.status(200).build();
+
+            return status(200).build();
         }
-        return ResponseEntity.status(404).build();
+
+        return status(404).build();
     }
+
 
     @DeleteMapping
-    public ResponseEntity deleteClientes(){
+    public ResponseEntity deletarTodos(){
         repository.deleteAll();
-        return ResponseEntity.status(200).build();
+
+        return status(200).build();
     }
 
+
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity deletarCliente(@Valid @PathVariable Integer id) {
+
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+
+            return status(200).build();
+        }
+        return status(404).build();
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity fazerLogin(@Valid @RequestBody AutenticacaoClienteRequisicao user) {
+        Cliente cliente = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
+
+        if (cliente == null) {
+            return status(400).build();
+        } else {
+            if(cliente.isAutenticado()){
+
+                return status(200).build();
+            }else{
+                return status(404).build();
+            }
+
+        }
+    }
+
+
+    @DeleteMapping("/logout")
+    public ResponseEntity fazerLogoff(@Valid @RequestBody AutenticacaoClienteRequisicao user) {
+        Cliente cliente = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
+
+        if (cliente.isAutenticado()) {
+            repository.setAutenticacao(false,cliente.getId());
+            return status(200).build();
+
+        } else {
+            return status(404).build();
+        }
+    }
 
 }

@@ -1,7 +1,6 @@
 package com.sptech.dreamhouse.entidade;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,67 +8,57 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
 
 @Entity
-
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCliente;
+    private Integer id;
 
-    @CPF
-    @NotBlank
-    @Length(min = 11)
-    private String cpf;
 
-    @Past
     @NotBlank
-    private LocalDate dtNascimento;
+    @Length(min = 3, max = 200)
+    private String nome;
+
 
     @Email
     @NotBlank
-    @Length(min = 11, max = 50)
+    @Length(min = 11, max = 60)
     private String email;
 
+
+    @Pattern(regexp = "^(?=.*[0-9])"
+            + "(?=.*[a-z])(?=.*[A-Z])"
+            + "(?=.*[!@#$%¨&*()_+`^{}?:;><,.|])"
+            + "(?=\\S+$).{8,20}$",
+            message = "Um caracter especial" +
+                    " \nUma letra maiuscula" +
+                    " \nUm número " +
+                    "\nConter no minimo 8 digitos")
     @NotBlank
-    @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
-            message = "Informe um telefone válido com ou sem ddd")
-    @Length(min = 15, max = 20)
-    private String telefone;
+    @Length(min = 8, max = 20)
+    private String senha;
 
-    @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
-            message = "Informe um telefone válido com ou sem ddd")
-    @NotBlank
-    @Length(min = 15, max = 20)
-    private String whatsapp;
+    @NotNull
+    private boolean autenticado;
 
-
-    public Integer getIdCliente() {
-        return idCliente;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public LocalDate getDtNascimento() {
-        return dtNascimento;
-    }
-
-    public void setDtNascimento(LocalDate dtNascimento) {
-        this.dtNascimento = dtNascimento;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -80,19 +69,19 @@ public class Cliente {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getWhatsapp() {
-        return whatsapp;
+    public boolean isAutenticado() {
+        return autenticado;
     }
 
-    public void setWhatsapp(String whatsapp) {
-        this.whatsapp = whatsapp;
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
     }
 }
