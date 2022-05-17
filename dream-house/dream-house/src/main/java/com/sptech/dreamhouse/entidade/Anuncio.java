@@ -12,7 +12,7 @@ public class Anuncio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAnuncio;
+    private Integer id;
 
     @NotBlank
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
@@ -77,13 +77,9 @@ public class Anuncio {
         this.detalhe = detalhe;
     }
 
-    public Integer getIdAnuncio() {
-        return idAnuncio;
-    }
+    public Integer getId() { return id;}
 
-    public void setIdAnuncio(Integer idAnuncio) {
-        this.idAnuncio = idAnuncio;
-    }
+    public void setId(Integer id) {this.id = id;}
 
     public String getTelefoneLocatario() {
         return telefoneLocatario;

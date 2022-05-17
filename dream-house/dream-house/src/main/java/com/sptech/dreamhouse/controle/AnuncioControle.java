@@ -56,7 +56,7 @@ public class  AnuncioControle {
                                           @RequestBody Anuncio anuncioAtuaslizado) {
         if (repository.existsById(idAnucio)) {
 
-            anuncioAtuaslizado.setIdAnuncio(idAnucio);
+            anuncioAtuaslizado.setId(idAnucio);
             repository.save(anuncioAtuaslizado);
 
             return status(200).build();
@@ -80,41 +80,41 @@ public class  AnuncioControle {
 
     @GetMapping("/filter/{cidade}")
     public ResponseEntity <List<Anuncio>> filtroCidade(@PathVariable String cidade){
-        List<Anuncio> anuncios = repository.findAll();
+        List<Anuncio> anuncios = repository.findByCidade(cidade);
         if(anuncios.isEmpty()){
-            return status(204).body(repository.findByCidade(cidade));
+            return status(204).body(anuncios);
         }
 
-
-        return status(200).body(repository.findByCidade(cidade));
+        return status(200).body(anuncios);
     }
 
-//    @PatchMapping(value = "/foto/{codigo}", consumes = "image/jpeg")
-//    public ResponseEntity patchFoto(@PathVariable Integer codigo,
-//                                    @RequestBody byte[] novaFoto) {
-//        /*if (!repository.existsById(codigo)) {
-//            return status(404).build();
-//        }
-//        AnimalEstimacao pet = repository.findById(codigo).get();
-//        pet.setFoto(novaFoto);
-//        repository.save(pet);
-//        return status(200).build();*/
-//
-////        int atualizados = repository.atualizerFoto(codigo, novaFoto);
-//        if (atualizados == 0) {
-//            return status(404).build();
-//        }
-//        return status(200).build();
-//    }
+    @PatchMapping(value = "/foto/{codigo}", consumes = "image/jpeg")
+    public ResponseEntity patchFoto(@PathVariable Integer codigo,
+                                    @RequestBody byte[] novaFoto) {
 
+        int atualizados = repository.atualizarFoto(codigo, novaFoto);
+        if (atualizados == 0) {
+            return status(404).build();
+        }
+        return status(200).build();
+    }
 
+    @GetMapping(value = "/foto/{codigo}", produces = "image/jpeg")
+    public ResponseEntity<byte[]> getFoto(@PathVariable Integer codigo) {
+
+        byte[] foto = repository.getFoto(codigo);
+        if (foto == null) {
+            return status(404).build();
+        }
+        return status(200).body(foto);
+    }
 
     @GetMapping("/exportar-anuncio")
     public ResponseEntity anuncio() {
         List<Anuncio> lista = repository.findAll();
         String relatorio = "";
         for (Anuncio anuncio : lista) {
-            relatorio += ""+anuncio.getIdAnuncio()+", "+anuncio.getDtPublicacao()+", "+anuncio.getDescricao()+", " +
+            relatorio += ""+anuncio.getId()+", "+anuncio.getDtPublicacao()+", "+anuncio.getDescricao()+", " +
                     ""+anuncio.getInicioDisponibilidade()+", "+anuncio.getFinalDisponibilidade()+", " +
                     ""+anuncio.getCidade()+", "+anuncio.getBairro()+", "+anuncio.getLogradouro()+", " +
                     ""+anuncio.getNumero()+", "+"Casa"+"\r\n";

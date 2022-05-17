@@ -94,10 +94,12 @@ public class ClienteControle {
             return status(400).build();
         } else {
             if(cliente.isAutenticado()){
-
-                return status(200).build();
-            }else{
                 return status(404).build();
+
+            }else{
+                repository.setAutenticacao(true, cliente.getId());
+
+                return status(200).body(cliente);
             }
 
         }
