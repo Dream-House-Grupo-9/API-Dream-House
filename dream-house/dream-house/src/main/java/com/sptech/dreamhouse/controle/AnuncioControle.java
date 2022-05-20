@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
-
 import static com.sptech.dreamhouse.exportacao.ExportacaoTxt.gravaArquivoTxt;
 import static com.sptech.dreamhouse.exportacao.ExportacaoTxt.leArquivoTxt;
+
 
 
 @RestController
@@ -107,16 +107,8 @@ public class  AnuncioControle {
     @GetMapping("/exportar-anuncio-txt")
     public ResponseEntity anuncioTxt() {
 
-
         List<Anuncio> lista = repository.findAll();
         String relatorio = "";
-        for (Anuncio a : lista) {
-            relatorio += ""+a.getIdAnuncio()+", "+a.getDtPublicacao()+", "+a.getDescricao()+", " +
-                    ""+a.getInicioDisponibilidade()+", "+a.getFinalDisponibilidade()+", " +
-                    ""+a.getCidade()+", "+a.getBairro()+", "+a.getLogradouro()+", " +
-                    ""+a.getNumero()+", "+"\r\n";
-
-        }
 
         gravaArquivoTxt(lista,"relatorio.txt");
         leArquivoTxt("relatorio.txt");
@@ -128,6 +120,7 @@ public class  AnuncioControle {
                 .body(relatorio);
 
     }
+
 
 
 }

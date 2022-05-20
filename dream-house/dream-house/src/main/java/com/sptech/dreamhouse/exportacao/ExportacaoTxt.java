@@ -42,13 +42,13 @@ public class ExportacaoTxt {
         for (Anuncio a : lista) {
             corpo = "02";
             corpo += String.format("%04d", a.getIdAnuncio());
-            corpo += String.format("%-25.25s", a.getDtPublicacao());
-            corpo += String.format("%-325.325s", a.getDescricao());
-            corpo += String.format("%-344.344s", a.getInicioDisponibilidade());
-            corpo += String.format("%363.363s", a.getFinalDisponibilidade());
-            corpo += String.format("%403.403s", a.getCidade());
-            corpo += String.format("%443.443s", a.getBairro());
-            corpo += String.format("%513.513s", a.getLogradouro());
+            corpo += String.format("%-19.19s", a.getDtPublicacao());
+            corpo += String.format("%-300.300s", a.getDescricao());
+            corpo += String.format("%-19.19s", a.getInicioDisponibilidade());
+            corpo += String.format("%-19.19s", a.getFinalDisponibilidade());
+            corpo += String.format("%-40.40s", a.getCidade());
+            corpo += String.format("%-40.40s", a.getBairro());
+            corpo += String.format("%-70.70s", a.getLogradouro());
             corpo += String.format("%04d", a.getNumero());
             contaRegCorpo++;
             gravaRegistro(corpo, nomeArq);
@@ -91,7 +91,7 @@ public class ExportacaoTxt {
 
                 } else if (tipoRegistro.equals("01")) {
                     System.out.println("É um registro de trailer");
-                    qtdRegCorpoGravado = Integer.parseInt(registro.substring(2, 12));
+                    qtdRegCorpoGravado = Integer.parseInt(registro.substring(2, 6));
                     if (contaRegCorpoLido == qtdRegCorpoGravado) {
                         System.out.println("Quantidade de registros lidos é compátivel " +
                                 "com a quantidade de registros gravados");
@@ -100,10 +100,9 @@ public class ExportacaoTxt {
                                 "com a quantidade de registros gravados");
                     }
 
-
                 } else if (tipoRegistro.equals("02")) {
                     System.out.println("É um registro de corpo");
-                    idAnuncio = Integer.valueOf(registro.substring(2, 6).trim());
+                    idAnuncio = Integer.valueOf(registro.substring(3, 6).trim());
                     dtPublicacao = registro.substring(6, 25).trim();
                     descricao = registro.substring(25, 325).trim();
                     inicioDisponibilidade = registro.substring(325, 344).trim();
