@@ -17,7 +17,6 @@ public class Anuncio {
     @NotBlank
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})",
             message = "Informe um telefone válido com ou sem ddd")
-    @Length(min = 15, max = 20)
     private String telefoneLocatario;
 
     @PastOrPresent
@@ -57,7 +56,8 @@ public class Anuncio {
     @NotNull
     private Cliente cliente;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
     private DetalhesAnuncio detalhe;
 
 

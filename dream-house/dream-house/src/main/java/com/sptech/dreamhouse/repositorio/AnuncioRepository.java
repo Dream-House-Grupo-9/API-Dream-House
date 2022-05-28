@@ -1,13 +1,14 @@
 package com.sptech.dreamhouse.repositorio;
 
 import com.sptech.dreamhouse.entidade.Anuncio;
+import com.sptech.dreamhouse.resposta.CardAnuncioViews;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
@@ -24,10 +25,10 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 
     List<Anuncio> findByDetalheValorSemanalBetween(Double valor1,Double valor2);
 
-    List<Anuncio> findByDetalheValorMensalBetween(Double valor1,Double valor2);
+    List<Anuncio> findByDetalheValorBetween(Double valor1,Double valor2);
 
-
-//    List<Anuncio> getDisponibilidade(LocalDate dataInicio,LocalDate dataFim);
+    @Query("select new com.sptech.dreamhouse.resposta.CardAnuncioViews(a.bairro, a.cidade, a.detalhe.valor) from Anuncio a where a.id = ?1")
+    List<CardAnuncioViews> consultaAnuncioCard(Integer id);
 
 
     @Query("select a.foto from Anuncio a where a.id = ?1")

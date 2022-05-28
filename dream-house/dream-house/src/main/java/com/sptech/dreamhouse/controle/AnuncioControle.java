@@ -1,11 +1,16 @@
 package com.sptech.dreamhouse.controle;
 
 import com.sptech.dreamhouse.entidade.Anuncio;
+import com.sptech.dreamhouse.estrutura.PilhaObj;
+import com.sptech.dreamhouse.exportacao.ExportacaoTxt;
 import com.sptech.dreamhouse.repositorio.AnuncioRepository;
+import com.sptech.dreamhouse.repositorio.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.status;
@@ -15,8 +20,12 @@ import static org.springframework.http.ResponseEntity.status;
 @RequestMapping("/anuncios")
 public class  AnuncioControle {
 
+
     @Autowired
     private AnuncioRepository repository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
 
     @PostMapping
@@ -107,6 +116,27 @@ public class  AnuncioControle {
             return status(404).build();
         }
         return status(200).body(foto);
+    }
+
+    @PostMapping(value = "/importacao-txt/{id}")
+    public ResponseEntity exportacaoTxt(
+            @PathVariable int id,
+            @RequestParam("file") MultipartFile file) throws IOException {
+
+        PilhaObj<Anuncio> anuncios = ExportacaoTxt.anunciarEmLote(file);
+
+        if (anuncios.isEmpyt()) {
+            return status(404).build();
+        } else {
+
+            while (!anuncios.isEmpyt()) {
+                Anuncio anuncio = anuncios.pop();
+                anuncio.setCliente(clienteRepository.getById(id));
+                repository.save(anuncio);
+            }
+
+            return status(200).build();
+        }
     }
 
     @GetMapping("/exportar-anuncio")
