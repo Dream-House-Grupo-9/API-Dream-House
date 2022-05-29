@@ -25,9 +25,11 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 
     List<Anuncio> findByDetalheValorSemanalBetween(Double valor1,Double valor2);
 
-    List<Anuncio> findByDetalheValorBetween(Double valor1,Double valor2);
+    List<Anuncio> findByDetalheValorMesBetween(Double valor1,Double valor2);
 
-    @Query("select new com.sptech.dreamhouse.resposta.CardAnuncioViews(a.bairro, a.cidade, a.detalhe.valor) from Anuncio a where a.id = ?1")
+    List<Anuncio> findByClienteId(Integer id);
+
+    @Query("select new com.sptech.dreamhouse.resposta.CardAnuncioViews(a.bairro, a.cidade, a.detalhe.valorMes) from Anuncio a where a.cliente.id = ?1")
     List<CardAnuncioViews> consultaAnuncioCard(Integer id);
 
 

@@ -52,6 +52,18 @@ public class  AnuncioControle {
         return status(200).body(anuncios);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity <List<Anuncio>> listaAnuncioPorId(@PathVariable int id){
+
+        List<Anuncio> anuncios = repository.findByClienteId(id);
+
+        if(anuncios.isEmpty()){
+            return status(204).body(anuncios);
+        }
+
+        return status(200).body(anuncios);
+    }
+
     @DeleteMapping
     public ResponseEntity deletarTodos(){
         repository.deleteAll();
@@ -74,7 +86,6 @@ public class  AnuncioControle {
         return status(404).build();
     }
 
-
     @DeleteMapping("/{codigo}")
     public ResponseEntity deletarAnuncio(@PathVariable Integer codigo) {
 
@@ -86,7 +97,6 @@ public class  AnuncioControle {
         return status(404).build();
     }
 
-
     @GetMapping("/filter/{cidade}")
     public ResponseEntity <List<Anuncio>> filtroCidade(@PathVariable String cidade){
         List<Anuncio> anuncios = repository.findByCidade(cidade);
@@ -95,6 +105,24 @@ public class  AnuncioControle {
         }
 
         return status(200).body(anuncios);
+    }
+
+    @GetMapping("/filter/tipo-aluguel/{valor}")
+    public ResponseEntity <List<Anuncio>> filtroTipoAluguel(@PathVariable Integer valor){
+        List<Anuncio> anuncios;
+
+        if(valor == 1){
+            anuncios = repository.findByDetalheAtivoDiariaTrue();
+            return anuncios.isEmpty()? status(204).body(anuncios) : status(200).body(anuncios);
+        }else if(valor == 2){
+            anuncios = repository.findByDetalheAtivoSemanalTrue();
+            return anuncios.isEmpty()? status(204).body(anuncios) : status(200).body(anuncios);
+        }else if(valor == 3){
+            anuncios = repository.findByDetalheAtivoMensalTrue();
+            return anuncios.isEmpty()? status(204).body(anuncios) : status(200).body(anuncios);
+        }
+
+        return status(404).build();
     }
 
     @PatchMapping(value = "/foto/{codigo}", consumes = "image/jpeg")
@@ -154,5 +182,4 @@ public class  AnuncioControle {
                 .header("content-disposition", "filename=\"relatorio-de-anuncios.csv\"")
                 .body(relatorio);
     }
-
 }

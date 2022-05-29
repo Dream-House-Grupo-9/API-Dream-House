@@ -74,7 +74,7 @@ public class ExportacaoTxt {
             corpo += String.format("%-5.5s",a.getDetalhe().isAtivoMensal());
             corpo += String.format("%10.2f",a.getDetalhe().getValorDiaria());
             corpo += String.format("%10.2f",a.getDetalhe().getValorSemanal());
-            corpo += String.format("%10.2f",a.getDetalhe().getValorMensal());
+            corpo += String.format("%10.2f",a.getDetalhe().getValorMes());
             corpo += String.format("%03d",a.getDetalhe().getQtdDormitorios());
             corpo += String.format("%03d",a.getDetalhe().getQtdToaletes());
             corpo += String.format("%-5.5s",a.getDetalhe().isGaragem());
@@ -162,7 +162,7 @@ public class ExportacaoTxt {
                 detalhe.setAtivoMensal(Boolean.parseBoolean(registro.substring(17, 22).trim()));
                 detalhe.setValorDiaria(Double.parseDouble(registro.substring(22, 32).trim()));
                 detalhe.setValorSemanal(Double.parseDouble(registro.substring(32, 42).trim()));
-                detalhe.setValorMensal(Double.parseDouble(registro.substring(42, 52).trim()));
+                detalhe.setValorMes(Double.parseDouble(registro.substring(42, 52).trim()));
                 detalhe.setQtdDormitorios(Integer.parseInt(registro.substring(52, 55)));
                 detalhe.setQtdToaletes(Integer.parseInt(registro.substring(55, 58)));
                 detalhe.setGaragem(Boolean.parseBoolean(registro.substring(58, 63).trim()));

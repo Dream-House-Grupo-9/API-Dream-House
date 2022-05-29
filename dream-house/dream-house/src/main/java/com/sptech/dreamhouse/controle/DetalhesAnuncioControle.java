@@ -91,7 +91,7 @@ public class DetalhesAnuncioControle {
             relatorio += ""+detalhesAnuncio.getIdDetalhesAnuncio()+", "+detalhesAnuncio.isAtivoDiaria()+"," +
                     ""+detalhesAnuncio.isAtivoSemanal()+", "+detalhesAnuncio.isAtivoMensal()+"," +
                     ""+detalhesAnuncio.getValorDiaria()+", "+detalhesAnuncio.getValorSemanal()+"," +
-                    ""+detalhesAnuncio.getValorMensal()+", "+detalhesAnuncio.getQtdDormitorios()+"," +
+                    ""+detalhesAnuncio.getValorMes()+", "+detalhesAnuncio.getQtdDormitorios()+"," +
                     ""+detalhesAnuncio.getQtdToaletes()+", "+detalhesAnuncio.isGaragem()+", " +
                     ""+detalhesAnuncio.isAreaDeTrabalho()+" ,"+detalhesAnuncio.isMobiliada()+"\r\n";
         }

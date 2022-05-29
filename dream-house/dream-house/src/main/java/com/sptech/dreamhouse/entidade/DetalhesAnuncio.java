@@ -25,8 +25,9 @@ public class DetalhesAnuncio {
     @NotNull
     private double valorSemanal;
 
-
-    private double valor;
+    @Positive
+    @NotNull
+    private double valorMes;
 
     @Positive
     @NotNull
@@ -94,12 +95,12 @@ public class DetalhesAnuncio {
         this.valorSemanal = valorSemanal;
     }
 
-    public double getValorMensal() {
-        return valor;
+    public double getValorMes() {
+        return valorMes;
     }
 
-    public void setValorMensal(double valorMensal) {
-        this.valor = valorMensal;
+    public void setValorMes(double valorMes) {
+        this.valorMes = valorMes;
     }
 
     public int getQtdDormitorios() {
