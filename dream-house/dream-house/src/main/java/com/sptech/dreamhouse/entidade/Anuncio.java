@@ -56,7 +56,7 @@ public class Anuncio {
     @NotNull
     private Cliente cliente;
 
-    @OneToOne//(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @NotNull
     private DetalhesAnuncio detalhe;
 

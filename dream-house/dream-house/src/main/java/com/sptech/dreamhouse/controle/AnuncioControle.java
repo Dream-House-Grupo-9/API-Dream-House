@@ -182,4 +182,12 @@ public class  AnuncioControle {
                 .header("content-disposition", "filename=\"relatorio-de-anuncios.csv\"")
                 .body(relatorio);
     }
+
+    @GetMapping("/gravar-txt")
+    public ResponseEntity gravaTxt(String nomeArq){
+        List<Anuncio> anuncios = repository.findAll();
+
+        ExportacaoTxt.gravaArquivoTxt(anuncios,"anuncio.txt");
+        return status(200).build();
+    }
 }
