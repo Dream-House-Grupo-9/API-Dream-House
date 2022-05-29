@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.status;
 
@@ -52,7 +53,19 @@ public class  AnuncioControle {
         return status(200).body(anuncios);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
+    public ResponseEntity getAnuncioPorId(@PathVariable int id){
+
+        Optional<Anuncio> anuncio = repository.findById(id);
+
+        if(anuncio == null){
+            return status(404).body(anuncio);
+        }
+
+        return status(200).body(anuncio);
+    }
+
+    @GetMapping("/cliente/{id}")
     public ResponseEntity <List<Anuncio>> listaAnuncioPorId(@PathVariable int id){
 
         List<Anuncio> anuncios = repository.findByClienteId(id);

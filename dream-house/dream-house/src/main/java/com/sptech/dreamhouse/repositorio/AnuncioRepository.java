@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface AnuncioRepository extends JpaRepository<Anuncio, Integer> {
 
+    long countBy();
+
     List<Anuncio> findByCidade(String cidade);
 
     List<Anuncio> findByDetalheAtivoDiariaTrue();

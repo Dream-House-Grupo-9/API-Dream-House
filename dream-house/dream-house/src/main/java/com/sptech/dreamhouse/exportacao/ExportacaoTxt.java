@@ -45,17 +45,23 @@ public class ExportacaoTxt {
         header += "01";
         // Grava o registro de header
         gravaRegistro(header, nomeArq);
+        System.out.println("saindo");
+
 
         // Monta e grava os registros de corpo
         String corpo;
+        String corpo2;
         for (Anuncio a : lista) {
+
+            System.out.println("Vou gravar o corpo");
+
             corpo = "01";
             corpo += String.format("%02d",a.getId());
             corpo += String.format("%-20.20s",a.getTelefoneLocatario());
-            corpo += String.format("%-10.10s",a.getDtPublicacao());
+//            corpo += String.format("%-10.10s",a.getDtPublicacao());
             corpo += String.format("%-30.30s",a.getDescricao());
-            corpo += String.format("%-10.10s",a.getInicioDisponibilidade());
-            corpo += String.format("%-10.10s",a.getFinalDisponibilidade());
+//            corpo += String.format("%-10.10s",a.getInicioDisponibilidade());
+//            corpo += String.format("%-10.10s",a.getFinalDisponibilidade());
             corpo += String.format("%-40.40s",a.getCidade());
             corpo += String.format("%-40.40s",a.getBairro());
             corpo += String.format("%-40.40s",a.getLogradouro());
@@ -63,26 +69,27 @@ public class ExportacaoTxt {
 
             contaRegCorpo++;
             gravaRegistro(corpo, nomeArq);
-        }
 
-        String corpo2;
-        for (Anuncio a : lista) {
-            corpo = "02";
-            corpo += String.format("%02d",a.getDetalhe().getIdDetalhesAnuncio());
-            corpo += String.format("%-5.5s",a.getDetalhe().isAtivoDiaria());
-            corpo += String.format("%-5.5s",a.getDetalhe().isAtivoSemanal());
-            corpo += String.format("%-5.5s",a.getDetalhe().isAtivoMensal());
-            corpo += String.format("%10.2f",a.getDetalhe().getValorDiaria());
-            corpo += String.format("%10.2f",a.getDetalhe().getValorSemanal());
-            corpo += String.format("%10.2f",a.getDetalhe().getValorMes());
-            corpo += String.format("%03d",a.getDetalhe().getQtdDormitorios());
-            corpo += String.format("%03d",a.getDetalhe().getQtdToaletes());
-            corpo += String.format("%-5.5s",a.getDetalhe().isGaragem());
-            corpo += String.format("%-5.5s",a.getDetalhe().isAreaDeTrabalho());
-            corpo += String.format("%-5.5s",a.getDetalhe().isMobiliada());
-            corpo += String.format("%-15.15s",a.getDetalhe().getCategoria());
+            System.out.println("Vou gravar o corpo2");
+
+            corpo2 = "02";
+            corpo2 += String.format("%02d",a.getDetalhe().getIdDetalhesAnuncio());
+            corpo2 += String.format("%-5.5s",a.getDetalhe().isAtivoDiaria());
+            corpo2 += String.format("%-5.5s",a.getDetalhe().isAtivoSemanal());
+            corpo2 += String.format("%-5.5s",a.getDetalhe().isAtivoMensal());
+            corpo2 += String.format("%10.2f",a.getDetalhe().getValorDiaria());
+            corpo2 += String.format("%10.2f",a.getDetalhe().getValorSemanal());
+            corpo2 += String.format("%10.2f",a.getDetalhe().getValorMes());
+            corpo2 += String.format("%03d",a.getDetalhe().getQtdDormitorios());
+            corpo2 += String.format("%03d",a.getDetalhe().getQtdToaletes());
+            corpo2 += String.format("%-5.5s",a.getDetalhe().isGaragem());
+            corpo2 += String.format("%-5.5s",a.getDetalhe().isAreaDeTrabalho());
+            corpo2 += String.format("%-5.5s",a.getDetalhe().isMobiliada());
+            corpo2 += String.format("%-15.15s",a.getDetalhe().getCategoria());
             contaRegCorpo++;
-            gravaRegistro(corpo, nomeArq);
+            gravaRegistro(corpo2, nomeArq);
+
+
         }
 
         // Monta e grava o registro de trailer
@@ -195,4 +202,6 @@ public class ExportacaoTxt {
 
         return pilhaAnuncio;
     }
+
+
 }

@@ -18,7 +18,6 @@ import static org.springframework.http.ResponseEntity.status;
 @RequestMapping("/clientes")
 
 public class ClienteControle {
-
     @Autowired
     private ClienteRepository repository;
 
