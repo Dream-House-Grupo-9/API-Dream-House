@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'dream-house'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_33823179B26C4B65ADD279B659EE16BE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3788202790DF4526966603DC4A9B2C00 }}
           package: '*.jar'
