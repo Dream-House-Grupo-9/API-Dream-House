@@ -13,19 +13,9 @@ import static org.mockito.Mockito.when;
 
 class ImagensControleTest {
 
-    @Autowired
-    AnuncioControle controller;
-
-    @MockBean
-    private AnuncioRepository repository;
-
-    @MockBean
-    private ClienteRepository clienteRepository;
 
     @Test
     void inserirImagem() {
 //      "casdas"
-
-        when(repository.findAll()).thenReturn(new ArrayList<>());
     }
 }
